@@ -26,7 +26,10 @@ Multiple ways of serializing a quantity of money are allowed:
 
 The string representation is composed of a currency code (three uppercase letters) followed by a number. It *must* match the Perl-compatible regular expression `[A-Z]{3}[0-9]+(\.[0-9]+)?`.
 
-Examples: `"EUR10.00"`, `"JPY1300"`.
+Examples:
+
+- `"EUR10.00"` → `DA00012D37 68 45555231302E3030`
+- `"JPY1300"` → `DA00012D37 67 4A505931333030`
 
 The array representation is composed of two or three elements:
 
@@ -34,7 +37,10 @@ The array representation is composed of two or three elements:
 2. The quantity of money (in any of the allowed formats listed in the previous section).
 3. A map (major type 5) of additional attributes attached to this amount of money. The map's keys *should* be text strings (major type 3) and a decoder *should* return an error if it encounters an attribute that it cannot attach to the re-created object.
 
-Examples: `["EUR", "10.00"]`, `["JPY", 1300, {"fuzzy": true}]`.
+Examples:
+
+- `["EUR", "10.00"]` → `DA00012D37 82 63 455552 65 31302E3030`
+- `["JPY", 1300, {"fuzzy": true}]` → `DA00012D37 83 63 4A5059 19 0514 A1 65 66757A7A79 F5`
 
 ## Tag 77112: MoneyBasket
 
@@ -47,7 +53,11 @@ If the key is a currency code, then the value *must* be a number serialized in o
 
 If the key is `"attrs"`, then the value *must* be a map (major type 5) of additional attributes attached to this basket. The map's keys *should* be text strings (major type 3) and a decoder *should* return an error if it encounters an attribute that it cannot attach to the re-created object.
 
-Examples: `{"EUR": 10.00}`, `{"JPY": "1300", "USD": "11.22"}`, `{"XAF": 0, "attrs": {"foo": "bar"}}`.
+Examples:
+
+- `{"EUR": 10.00}` → `DA00012D38 A1 63 455552 C4 82 21 1903E8`
+- `{"JPY": "1300", "USD": "11.22"}` → `DA00012D38 A2 63 4A5059 64 31333030 63 555344 65 31312E3232`
+- `{"XAF": 0, "attrs": {"foo": "bar"}}` → `DA00012D38 A2 63 584146 00 65 6174747273 A1 63 666F6F 63 626172`
 
 ## Implementations
 
