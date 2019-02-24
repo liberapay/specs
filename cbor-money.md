@@ -16,6 +16,7 @@ Multiple ways of serializing a quantity of money are allowed:
 - As an integer (major types 1 and 2).
 - As a big number ([tags 2 and 3](https://tools.ietf.org/html/rfc7049#section-2.4.2)).
 - As a decimal fraction or big float ([tags 4 and 5](https://tools.ietf.org/html/rfc7049#section-2.4.3)).
+- As a rational number ([tag 30](http://peteroupc.github.io/CBOR/rational.html)).
 - As an arbitrary-exponent number ([tags 264 and 265](http://peteroupc.github.io/CBOR/bigfrac.html)).
 
 ## Tag 77111: Money
